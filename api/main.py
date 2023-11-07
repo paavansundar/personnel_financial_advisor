@@ -17,9 +17,9 @@ def save_to_text(content, filename):
 
 @app.get('/')
 def read_form():
-    return 'hello world'
+    return 'hello welecome to Personnel financial advisor please navigate to /home'
 
-@app.get('/form')
+@app.get('/home')
 def form_post(request: Request):
     result = 'Type a number'
     return templates.TemplateResponse('form.html', context={'request': request, 'result': result})
