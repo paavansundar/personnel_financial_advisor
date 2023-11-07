@@ -11,3 +11,14 @@ output = query({
 	"inputs": "Can you please let us know more details about your ",
 })
 
+# Use a pipeline as a high-level helper
+from transformers import pipeline
+
+pipe = pipeline("text-generation", model="jirin/Llama-2-13b-fingpt2")
+
+# Load model directly
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+tokenizer = AutoTokenizer.from_pretrained("jirin/Llama-2-13b-fingpt2")
+model = AutoModelForCausalLM.from_pretrained("jirin/Llama-2-13b-fingpt2")
+
