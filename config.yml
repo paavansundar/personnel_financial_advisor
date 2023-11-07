@@ -1,0 +1,10 @@
+# Package Overview
+package_name: personnel_financial_advisor
+
+# Data Files
+training_data_file: stock_data.csv
+
+# Variables
+# The variable we are attempting to predict (cnt)
+target: price
+
