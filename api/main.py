@@ -17,45 +17,23 @@ def save_to_text(content, filename):
 
 @app.get('/')
 def read_form():
-    return 'hello welecome to Personnel financial advisor please navigate to /home'
+    return templates.TemplateResponse('home.html', context={'request': request, 'result': result})
 
 @app.get('/home')
 def form_post(request: Request):
-    result = 'Type a number'
-    return templates.TemplateResponse('form.html', context={'request': request, 'result': result})
+   
+    return templates.TemplateResponse('home.html', context={'request': request, 'result': result})
 
 
-@app.post('/form')
+@app.post('/seek_advice')
 def form_post(request: Request, num: int = Form(...)):
-    result = spell_number(num)
-    return templates.TemplateResponse('form.html', context={'request': request, 'result': result, 'num': num})
+    advice=request.args.get("advice")
+    if advice == "Personnel Advice":
+        return templates.TemplateResponse('personnel_advisor.html', context={'request': request)
+    return templates.TemplateResponse('generic_advisor.html', context={'request': request)
 
 
-@app.get('/checkbox')
-def form_post(request: Request):
-    result = 'Type a number'
-    return templates.TemplateResponse('checkbox.html', context={'request': request, 'result': result})
 
 
-@app.post('/checkbox')
-def form_post(request: Request, num: int = Form(...), multiply_by_2: bool = Form(False)):
-    result = spell_number(num, multiply_by_2)
-    return templates.TemplateResponse('checkbox.html', context={'request': request, 'result': result, 'num': num})
 
 
-@app.get('/download')
-def form_post(request: Request):
-    result = 'Type a number'
-    return templates.TemplateResponse('download.html', context={'request': request, 'result': result})
-
-
-@app.post('/download')
-def form_post(request: Request, num: int = Form(...), multiply_by_2: bool = Form(False), action: str = Form(...)):
-    if action == 'convert':
-        result = spell_number(num, multiply_by_2)
-        return templates.TemplateResponse('download.html', context={'request': request, 'result': result, 'num': num})
-    elif action == 'download':
-        # Requires aiofiles
-        result = spell_number(num, multiply_by_2)
-        filepath = save_to_text(result, num)
-        return FileResponse(filepath, media_type='application/octet-stream', filename='{}.txt'.format(num))
