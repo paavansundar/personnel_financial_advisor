@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sample Form</title>
+    <title>Welcome to Personnel Financial Advisor</title>
 </head>
 <body>
 <form method="post">
-    <input type="number" name="num" value="{{ num }}"/>
-    <input type="submit">
+<p>
+    <label color="blue"><h3>Seeking :</h3></label><br/>
+    <input type="radio" id="personneladvice" name="advice" value="Personnel Advice">
+    <label for="personneladvice">Personnel Advice</label><br>
+    <input type="radio" id="genericadvice" name="advice" value="Generic Advice">
+    <label for="genericadvice">Gernirc Advice</label><br>
+    <input type="submit" value="Please select">
+</p>
 </form>
-<p>Result: {{ result }}</p>
+
 </body>
 </html>
