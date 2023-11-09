@@ -1,14 +1,24 @@
 <html>
-  <title>Specific query</title>
+  <head>
+    <metadata charset="UTF-8">
+    <title>Specific query</title>
+  </head>
   <body>
     <p>
+      <form action="/specific_advice" method="post>
       <label for="sal">Enter your approximate yearly salary: INR </label>
       <input type="tex" name="sal" id="sal"/>
        <label for="sal">Enter your age:</label>
       <input type="tex" name="age" id="age"/>
       <label for="residence">Enter your place of residency:\n(1)City\n(2)District\n(3)Village\n</label>
       <input type="texarea" name="address" id="address"/>
-      Enter your gender (M/F): 
+      <input type="radio" id="male" name="gender" value="Male">
+      <label></label>Enter your gender (M/F): </label></br>
+      <label for="male">male</label><br>
+      <input type="radio" id="female" name="gender" value="Female">
+      <label for="female">Female</label><br>
+      <input type="submit" value="Please select">
+      </form>
       
     </p>
   </body>
