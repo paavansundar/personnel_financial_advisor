@@ -9,9 +9,9 @@ import PyPDF2
 
 import warnings
 warnings.filterwarnings('ignore')
-_file_path = './trained_models/iinvestrbook.pdf'
+_file_path = './datasets/iinvestrbook.pdf'
 _checkpoint = "gpt2"
-_model_output_path = "./model"
+_model_output_path = "./trained_models"
 class GenericAdvice:
     def read_txt(self,file_path):
      text="" 
@@ -69,7 +69,7 @@ class GenericAdvice:
             overwrite_output_dir = True,
             per_device_train_batch_size = 2, # try with 4
             per_device_eval_batch_size = 2,  #  try with 4
-            num_train_epochs = 1,#100
+            num_train_epochs = 0.001,#100
             save_steps = 1_000,
             save_total_limit = 2,
             logging_dir = './logs',
@@ -116,5 +116,6 @@ class GenericAdvice:
         return response
        
 
-
+t=GenericAdvice()
+t.trainModel()
 
