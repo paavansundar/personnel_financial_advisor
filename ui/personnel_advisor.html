@@ -1,11 +1,12 @@
+<!DOCTYPE html>
 <html>
   <head>
     <metadata charset="UTF-8">
-    <title>Specific query</title>
+    <title>Persnonnel Portfolio query</title>
   </head>
   <body>
     <p>
-      <form action="/specific_advice" method="post>
+      <form action="/personnel_advice" method="post>
       <label for="sal">Enter your approximate yearly salary: INR </label>
       <input type="tex" name="sal" id="sal"/>
        <label for="sal">Enter your age:</label>
@@ -17,6 +18,7 @@
       <label for="male">male</label><br>
       <input type="radio" id="female" name="gender" value="Female">
       <label for="female">Female</label><br>
+      <input type="textarea" rows="5">{{personnel_advice}}</textarea>
       <input type="submit" value="Please select">
       </form>
       
