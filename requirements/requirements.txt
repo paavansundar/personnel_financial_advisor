@@ -12,4 +12,6 @@ black
 fastapi
 PyPDF2
 wheel
+langchain
 uvicorn
+openai
