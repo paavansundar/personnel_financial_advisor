@@ -57,9 +57,9 @@ def form_post(request: Request,sal: Annotated[int, Form()],
     res=stockObj.getStockAdvice(sal,age,address,gender,stock)
     return templates.TemplateResponse('stock_specific_query.html', context={'request': request,'response':res})
 
-@app.post('/generic_advice')
-def form_post(request: Request):
-    prompt=request.args.get("prompt")
+@app.post('/general_advice')
+def form_post(request: Request,prompt: Annotated[str, Form()]):
+    print(prompt)
     genericAdviceObj=generic_advice.GenericAdvice()
     answer=genericAdviceObj.chat(prompt)
     return templates.TemplateResponse('generic_advisor.html', context={'request': request,'answer':answer})

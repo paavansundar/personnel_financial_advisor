@@ -9,9 +9,9 @@ import PyPDF2
 
 import warnings
 warnings.filterwarnings('ignore')
-_file_path = './datasets/iinvestrbook.pdf'
+_file_path = '../datasets/iinvestrbook.pdf'
 _checkpoint = "gpt2"
-_model_output_path = "./trained_models"
+_model_output_path = "../trained_models"
 class GenericAdvice:
     def read_txt(self,file_path):
      text="" 
@@ -39,10 +39,10 @@ class GenericAdvice:
        val_text = text_file[split_index:]
 
 
-       with open("./datasets/train.txt", "w") as f:
+       with open("../trained_models/train.txt", "w") as f:
           f.write(train_text)
 
-       with open("./datasets/val.txt", "w") as f:
+       with open("../trained_models/val.txt", "w") as f:
           f.write(val_text)
        
     def loadGPT(self): 
@@ -54,9 +54,9 @@ class GenericAdvice:
      self.preprocessBook()
      try:
        # Tokenize train text
-        train_dataset = TextDataset(tokenizer=tokenizer, file_path="./datasets/train.txt", block_size=128)
+        train_dataset = TextDataset(tokenizer=tokenizer, file_path="../trained_models/train.txt", block_size=128)
         # Tokenize validation text
-        val_dataset = TextDataset(tokenizer=tokenizer, file_path="./datasets/val.txt", block_size=128)
+        val_dataset = TextDataset(tokenizer=tokenizer, file_path="../trained_models/val.txt", block_size=128)
         # Create a Data collator object
         data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False, return_tensors="pt")
         # Set up the model
@@ -116,6 +116,4 @@ class GenericAdvice:
         return response
        
 
-t=GenericAdvice()
-t.trainModel()
 
