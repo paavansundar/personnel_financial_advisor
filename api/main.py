@@ -1,25 +1,26 @@
+import sys
+from pathlib import Path
+
+file = Path(__file__).resolve()
+parent, root = file.parent, file.parents[1]
+sys.path.append(str(root))
+
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 from starlette.responses import FileResponse
 
-from model import GenericAdvice,StockSpecific
+from typing import Annotated
+
+from model import generic_advice,share_specific_advice
 
 
 
 app = FastAPI()
-templates = Jinja2Templates(directory='./ui')
-
-
-def save_to_text(content, filename):
-    filepath = 'data/{}.txt'.format(filename)
-    with open(filepath, 'w') as f:
-        f.write(content)
-    return filepath
-
+templates = Jinja2Templates(directory='./templates')
 
 @app.get('/')
-def read_form():
-    return templates.TemplateResponse('home.html')
+def read_form(request: Request):
+    return templates.TemplateResponse('home.html',context={'request': request})
 
 @app.get('/home')
 def form_home(request: Request):
@@ -28,8 +29,8 @@ def form_home(request: Request):
 
 
 @app.post('/seek_advice')
-def form_post(request: Request):
-    advice=request.args.get("advice")
+def form_post(request: Request,advice: Annotated[str, Form()]):
+    #advice=request.args.get("advice")
     if advice == "Personnel Advice":
         return templates.TemplateResponse('personnel_advisor.html', context={'request': request})
     elif advice == "Stock Advice":
@@ -38,25 +39,29 @@ def form_post(request: Request):
     return templates.TemplateResponse('generic_advisor.html', context={'request': request})
 
 @app.post('/personnel_advice')
-def form_post(request: Request):
-    advice=request.args.get("advice")
+def form_post(request: Request,sal: Annotated[int, Form()],
+          age: Annotated[int, Form()],
+          gender: Annotated[str, Form()],
+          address: Annotated[str, Form()]):
+    
     return templates.TemplateResponse('personnel_advisor.html', context={'request': request})
 
 @app.post('/stock_specific')
-def form_post(request: Request):
-    sal=request.args.get("sal")
-    age=request.args.get("age")
-    address=request.args.get("address")
-    gender=request.args.get("gender")
-    stock=request.args.get("stock") 
-    stockObj=StockSpecific()
+def form_post(request: Request,sal: Annotated[int, Form()],
+          age: Annotated[int, Form()],
+          gender: Annotated[str, Form()],
+          address: Annotated[str, Form()],
+          stock: Annotated[str, Form()]):
+    print("age",age,gender,address,stock)
+    stockObj=share_specific_advice.StockSpecific()
     res=stockObj.getStockAdvice(sal,age,address,gender,stock)
-    return templates.TemplateResponse('generic_advisor.html', context={'request': request,'response':res})
+    return templates.TemplateResponse('stock_specific_query.html', context={'request': request,'response':res})
 
 @app.post('/generic_advice')
 def form_post(request: Request):
     prompt=request.args.get("prompt")
-    genericAdviceObj=GenericAdvice()
+    genericAdviceObj=generic_advice.GenericAdvice()
     answer=genericAdviceObj.chat(prompt)
     return templates.TemplateResponse('generic_advisor.html', context={'request': request,'answer':answer})
+
 

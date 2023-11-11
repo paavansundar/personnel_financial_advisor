@@ -115,8 +115,6 @@ class GenericAdvice:
         response = self.generate_response(my_model, my_tokenizer, prompt)
         return response
        
-obj=GenericAdvice()
-#obj.trainModel()
-obj.chat("what is investment?")
+
 
 

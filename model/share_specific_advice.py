@@ -10,11 +10,13 @@ import pickle
 api_key="T3G64J7EEOLUWF8K"
 class StockSpecific:
     def get_tolerance(self,user):
-        data = pd.read_csv("calculate_tolerance.csv", delimiter=",", index_col=False)
+        #tol_port,tol_stock="",""
+     #try:
+        data = pd.read_csv("../datasets/calculate_tolerance.csv", delimiter=",", index_col=False)
         #Extract user information to find tolerance
         sal = user['sal']
         age = int(user['age'])
-        res = int(user['res'])
+        res = user['res']
         gender = user['gender']
         #get salary category
         if (sal<=250000):
@@ -31,19 +33,21 @@ class StockSpecific:
         #Extract and return tolerance values
         tol_port = temp1['Tol_P']
         tol_stock = temp1['Tol_S']
+     #except Exception as e:
+       # print(e)
         return tol_port, tol_stock
 
     def stock_info(self,ticker, tol):
-        print("\nLet's see...")
-        print("Printing out some data for you:")
-        print("-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-")
+
         reco=""
+        tol=2
         tol1 = float((100+tol)/100) # Format the tolerance value to float
         tol = str(tol)
         # obtain the data from ALPHAVANTAGE for that ticker
         request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey={api_key}"
         response = requests.get(request_url)
         parsed_response = json.loads(response.text)
+        print("Response is ",parsed_response)
         last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
         tsd = parsed_response["Time Series (Daily)"]
         dates = list(tsd.keys())
@@ -95,6 +99,10 @@ class StockSpecific:
 
     def getStockAdvice(self,sal,age,res,gender,ticker): 
         user=dict()
-        tol=self.get_tolerance(user)
-        return self.getStockAdvice(ticker, tol)
+        user['sal']=sal
+        user['age']=age
+        user['res']=res
+        user['gender']=gender
+        #tol=self.get_tolerance(user) #Need Recheck
+        return self.stock_info(ticker, 2)
   

@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <metadata charset="UTF-8">
+    <title>Specific query</title>
+    <style>
+      .form-container {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-height: 100vh; /* vh stands for viewport height */
+              }
+
+  form {
+              width: 50%; /* adjust this value to control the form's width */
+  }
+</style>
+  </head>
+  <body bgcolor="#E0FFFF">
+    <p>
+      <label color="blue"><h3 color="blue">Seeking Stock Specific advice:</h3></label><br/>
+      <form action="/stock_specific" method="post" class="form"> 
+        <table>
+        <tr><td><label for="sal">Enter your approximate yearly salary: INR </label></td>
+        <td><input type="tex" name="sal" id="sal"/></td></tr>
+        <tr><td><label for="sal">Enter your age:</label></td>
+        <td><input type="tex" name="age" id="age"/></td></tr>
+      <tr><td><label for="residence">Enter your place of residency:City</label></td>
+        <td><input type="texarea" name="address" id="address"/></td></tr>
+        <tr>
+          <td><label></label>Enter your gender (M/F): </label></td>
+          <td><input type="radio" id="male" name="gender" value="Male">
+          <label for="male">male</label></td>
+          <td><input type="radio" id="female" name="gender" value="Female">
+          <label for="female">Female</label></td>
+        </tr>
+        <tr><td><label for="stock">Enter stock/crypto symbol that you wish to query for: </label></td>
+        <td><input type="text" name="stock" id="stock"/></td></tr>
+        <tr><td><label>Response:{{response}}</label></td></tr>
+        <tr><td><input type="submit"></td></tr>
+      </table>
+      
+        
+      </form>
+    </p>
+  </body>
+</html>

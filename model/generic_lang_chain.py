@@ -63,5 +63,4 @@ class GenericLangChain:
         QA_CHAIN_PROMPT = PromptTemplate.from_template(template)
         return QA_CHAIN_PROMPT
 
-obj=GenericLangChain()
-obj.chat("what is investment?")
+
