@@ -50,7 +50,8 @@ def form_post(request: Request):
     gender=request.args.get("gender")
     stock=request.args.get("stock") 
     stockObj=StockSpecific()
-    return stockObj.getStockAdvice(sal,age,address,gender,stock)
+    res=stockObj.getStockAdvice(sal,age,address,gender,stock)
+    return templates.TemplateResponse('generic_advisor.html', context={'request': request,'response':res})
 
 @app.post('/generic_advice')
 def form_post(request: Request):
@@ -58,3 +59,4 @@ def form_post(request: Request):
     genericAdviceObj=GenericAdvice()
     answer=genericAdviceObj.chat(prompt)
     return templates.TemplateResponse('generic_advisor.html', context={'request': request,'answer':answer})
+
