@@ -27,7 +27,7 @@ class GenericAdvice:
 
     def preprocessBook(self):
        text_file = self.read_txt(_file_path)
-       print(text_file[0:100])
+      
        # Remove excess newline characters
        text_file = re.sub(r'\n+', '\n', text_file).strip()
 
@@ -67,9 +67,9 @@ class GenericAdvice:
         training_args = TrainingArguments(
             output_dir = _model_output_path,
             overwrite_output_dir = True,
-            per_device_train_batch_size = 4, # try with 2
-            per_device_eval_batch_size = 4,  #  try with 2
-            num_train_epochs = 100,
+            per_device_train_batch_size = 2, # try with 4
+            per_device_eval_batch_size = 2,  #  try with 4
+            num_train_epochs = 1,#100
             save_steps = 1_000,
             save_total_limit = 2,
             logging_dir = './logs',
@@ -90,8 +90,8 @@ class GenericAdvice:
      except Exception as e:
         print(e)
     
-    def generate_response(model, tokenizer, prompt, max_length=100):
-
+    def generate_response(self,model, tokenizer, prompt, max_length=100):
+        print("prompt is ",prompt)
         input_ids = tokenizer.encode(prompt, return_tensors="pt")      # 'pt' for returning pytorch tensor
 
         # Create the attention mask and pad token id
@@ -105,24 +105,18 @@ class GenericAdvice:
             attention_mask=attention_mask,
             pad_token_id=pad_token_id
         )
+        response=tokenizer.decode(output[0], skip_special_tokens=True)
+        #print (response)
+        return response
 
-        return tokenizer.decode(output[0], skip_special_tokens=True)
-
+    def chat(self,prompt):
+        my_model = GPT2LMHeadModel.from_pretrained(_model_output_path)
+        my_tokenizer = GPT2Tokenizer.from_pretrained(_model_output_path)
+        response = self.generate_response(my_model, my_tokenizer, prompt)
+        return response
+       
 obj=GenericAdvice()
-obj.trainModel()
-'''my_model = GPT2LMHeadModel.from_pretrained(__model_output_path)
-my_tokenizer = GPT2Tokenizer.from_pretrained(__model_output_path)
-prompt = "What is teaching of Buddha?"  # Replace with your desired prompt
-response = generate_response(my_model, my_tokenizer, prompt)
-print("Generated response:", response)
+#obj.trainModel()
+obj.chat("what is investment?")
 
-# Testing with given prompt 2
-prompt = "what is dharma ?"  # Replace with your desired prompt
-response = generate_response(my_model, my_tokenizer, prompt, max_length=150)
-print("Generated response:", response)
 
-# Testing with given prompt 3
-
-prompt = "how to live ?"  # Replace with your desired prompt
-response = generate_response(my_model, my_tokenizer, prompt, max_length=150)
-print("Generated response:", response)'''
