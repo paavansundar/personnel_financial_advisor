@@ -53,9 +53,9 @@ class GenericAdviceTraining:
      self.preprocessBook()
      try:
        # Tokenize train text
-        train_dataset = TextDataset(tokenizer=tokenizer, file_path="../trained_models/train.txt", block_size=128)
+        train_dataset = TextDataset(tokenizer=tokenizer, file_path="./trained_models/train.txt", block_size=128)
         # Tokenize validation text
-        val_dataset = TextDataset(tokenizer=tokenizer, file_path="../trained_models/val.txt", block_size=128)
+        val_dataset = TextDataset(tokenizer=tokenizer, file_path="./trained_models/val.txt", block_size=128)
         # Create a Data collator object
         data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False, return_tensors="pt")
         # Set up the model
