@@ -37,7 +37,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Train the model
       run: |
-        python ./paavansundar/personnel_financial_advisor/model/train.py
+        python ./model/train.py
     
     - name: Configure Git
       run: |
