@@ -11,7 +11,7 @@ warnings.filterwarnings('ignore')
 _file_path = '../datasets/iinvestrbook.pdf'
 _checkpoint = "gpt2"
 _model_output_path = "../trained_models"
-class GenericAdvice:
+class GenericAdviceTraining:
     def read_txt(self,file_path):
      text="" 
      try:
