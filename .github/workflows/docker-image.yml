@@ -44,7 +44,9 @@ jobs:
         git config --global user.email "paavan.sundar@gmail.com"
         git config --global user.name "paavansundar"
         
-    
+    - name: Test with pytest
+      run: |
+        pytest
         
     - name: Log into registry 
       uses: docker/login-action@v2.1.0
