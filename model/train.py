@@ -8,9 +8,9 @@ import PyPDF2
 
 import warnings
 warnings.filterwarnings('ignore')
-_file_path = '../datasets/iinvestrbook.pdf'
+_file_path = './datasets/iinvestrbook.pdf'
 _checkpoint = "gpt2"
-_model_output_path = "../trained_models"
+_model_output_path = "./trained_models"
 class GenericAdviceTraining:
     def read_txt(self,file_path):
      text="" 
@@ -38,10 +38,10 @@ class GenericAdviceTraining:
        val_text = text_file[split_index:]
 
 
-       with open("../trained_models/train.txt", "w") as f:
+       with open("./trained_models/train.txt", "w") as f:
           f.write(train_text)
 
-       with open("../trained_models/val.txt", "w") as f:
+       with open("./trained_models/val.txt", "w") as f:
           f.write(val_text)
        
     def loadGPT(self): 
