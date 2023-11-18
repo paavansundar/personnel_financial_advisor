@@ -18,6 +18,6 @@ from model import generic_advice,share_specific_advice
 
 def test_make_prediction():
     genericAdviceObj=generic_advice.GenericAdvice()
-    answer=genericAdviceObj.chat(prompt)
+    answer=genericAdviceObj.chat("what is investment?")
     
     assert answer != None
