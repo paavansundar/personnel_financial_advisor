@@ -60,10 +60,9 @@ class GenericAdviceTraining:
         data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False, return_tensors="pt")
         # Set up the model
         model = GPT2LMHeadModel.from_pretrained(_checkpoint)    # also try gpt2, gpt2-large and gpt2-medium, also gpt2-xl
-
+         
         # Set up the training arguments
-    
-       training_args = TrainingArguments(
+        training_args = TrainingArguments(
             output_dir = _model_output_path,
             overwrite_output_dir = True,
             per_device_train_batch_size = 4, # try with 4
@@ -72,7 +71,7 @@ class GenericAdviceTraining:
             save_steps = 1_000,
             save_total_limit = 2,
             logging_dir = './logs',
-        )
+          )
         # Train the model
         trainer = Trainer(
             model = model,
