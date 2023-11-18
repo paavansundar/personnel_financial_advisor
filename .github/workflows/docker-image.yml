@@ -37,7 +37,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Train the model
       run: |
-        python ./personnel_financial_advisor/train.py
+        python ./paavansundar/personnel_financial_advisor/models/train.py
     
     - name: Configure Git
       run: |
@@ -46,7 +46,7 @@ jobs:
         
     - name: Commit and push pkl file
       run: |
-        git add -f ./personnel_financial_advisor/trained_models/*.pkl
+        git add -f ./paavansundar/personnel_financial_advisor/trained_models/*.pkl
         git commit -m 'pushing new pkl file.'
         git push
     
