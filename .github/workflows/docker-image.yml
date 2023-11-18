@@ -37,32 +37,14 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Train the model
       run: |
-        python ./paavansundar/personnel_financial_advisor/models/train.py
+        python ./paavansundar/personnel_financial_advisor/model/train.py
     
     - name: Configure Git
       run: |
         git config --global user.email "paavan.sundar@gmail.com"
         git config --global user.name "paavansundar"
         
-    - name: Commit and push pkl file
-      run: |
-        git add -f ./paavansundar/personnel_financial_advisor/trained_models/*.pkl
-        git commit -m 'pushing new pkl file.'
-        git push
     
-    - name: Test with pytest
-      run: |
-        pytest
-         
-    - name: Build wheel file
-      run: |
-        python setup.py bdist_wheel --universal
-                 
-    - name: Commit and push wheel
-      run: |
-        git add -f ./dist/*.whl
-        git commit -m 'pushing new wheel'
-        git push
         
     - name: Log into registry 
       uses: docker/login-action@v2.1.0
