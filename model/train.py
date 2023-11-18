@@ -38,10 +38,10 @@ class GenericAdviceTraining:
        val_text = text_file[split_index:]
 
 
-       with open("./trained_models/train.txt", "w") as f:
+       with open("./trained_models/train.txt", "w+") as f:
           f.write(train_text)
 
-       with open("./trained_models/val.txt", "w") as f:
+       with open("./trained_models/val.txt", "w+") as f:
           f.write(val_text)
        
     def loadGPT(self): 
