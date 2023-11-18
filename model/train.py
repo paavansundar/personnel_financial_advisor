@@ -66,9 +66,9 @@ class GenericAdviceTraining:
         training_args = TrainingArguments(
             output_dir = _model_output_path,
             overwrite_output_dir = True,
-            per_device_train_batch_size = 2, # try with 4
-            per_device_eval_batch_size = 2,  #  try with 4
-            num_train_epochs = 0.001,#100
+            per_device_train_batch_size = 4, # try with 4
+            per_device_eval_batch_size = 4,  #  try with 4
+            num_train_epochs = 10,#100
             save_steps = 1_000,
             save_total_limit = 2,
             logging_dir = './logs',
