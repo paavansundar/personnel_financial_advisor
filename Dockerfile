@@ -4,9 +4,7 @@ ADD ./personnel_financial_advisor /personnel_financial_advisor
 
 WORKDIR /personnel_financial_advisor
 
-
-COPY ./requirements/requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r ./requirements/requirements.txt
 
 COPY . .
 
