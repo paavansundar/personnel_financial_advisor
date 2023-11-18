@@ -88,3 +88,5 @@ class GenericAdviceTraining:
         tokenizer.save_pretrained(_model_output_path)
      except Exception as e:
         print(e)
+genAdviceTrainingObj=GenericAdviceTraining()
+genAdviceTrainingObj.trainModel()
