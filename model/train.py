@@ -67,7 +67,7 @@ class GenericAdviceTraining:
             overwrite_output_dir = True,
             per_device_train_batch_size = 4, # try with 4
             per_device_eval_batch_size = 4,  #  try with 4
-            num_train_epochs = 0.1,#100
+            num_train_epochs = 2,#100
             save_steps = 1_000,
             save_total_limit = 2,
             logging_dir = './logs',
