@@ -2,22 +2,12 @@
   <head>
     <metadata charset="UTF-8">
     <title>Specific query</title>
-    <style>
-      .form-container {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              min-height: 100vh; /* vh stands for viewport height */
-              }
-
-  form {
-              width: 50%; /* adjust this value to control the form's width */
-  }
-</style>
+     <link rel="stylesheet" href="./style.css">
   </head>
-  <body bgcolor="#E0FFFF">
-    <p>
-      <label color="blue"><h3 color="blue">Seeking Stock Specific advice:</h3></label><br/>
+  <body>
+    <div class="container">
+
+      <div class="cta-form"><h3 color="blue">Seeking Stock Specific advice:</h3></div>
       <form action="/stock_specific" method="post" class="form"> 
         <table>
         <tr><td><label for="sal">Enter your approximate yearly salary: INR </label></td>
@@ -41,6 +31,7 @@
       
         
       </form>
-    </p>
+
+    </div>  
   </body>
 </html>
