@@ -15,13 +15,12 @@ from typing import Annotated
 
 from model import generic_advice,share_specific_advice
 
+app = FastAPI()
 app.mount(
     "/static",
     StaticFiles(directory=Path(__file__).parent.parent.absolute() / "static"),
     name="static",
 )
-
-app = FastAPI()
 templates = Jinja2Templates(directory='./templates')
 
 @app.get('/')

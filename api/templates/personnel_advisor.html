@@ -3,45 +3,31 @@
   <head>
     <metadata charset="UTF-8">
     <title>Persnonnel Portfolio query</title>
-    <style>
-      .form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* vh stands for viewport height */
-}
-
-form {
-  width: 50%; /* adjust this value to control the form's width */
-}
-    </style>
+    <link rel="stylesheet" href="../../static/style.css">
   </head>
   <body bgcolor="#E0FFFF">
-    <p>
-      <form action="/personnel_advice" method="post" class="form-container form" method="post">
-        <div>
-          <table>
-          <tr><td><label for="sal">Enter your approximate yearly salary: INR </label></td>
-          <td><input type="tex" name="sal" id="sal"/></td></tr>
-          <tr><td><label for="sal">Enter your age:</label></td>
-          <td><input type="tex" name="age" id="age"/></td></tr>
-        <tr><td><label for="residence">Enter your place of residency:\n(1)City\n(2)District\n(3)Village\n</label></td>
-          <td><input type="texarea" name="address" id="address"/></td></tr>
-          <tr>
-            <td><label></label>Enter your gender (M/F): </label></td>
-            <td><input type="radio" id="male" name="gender" value="Male">
-            <label for="male">male</label></td>
-            <td><input type="radio" id="female" name="gender" value="Female">
-            <label for="female">Female</label></td>
-          </tr>
-          <tr><td><input type="submit"></td></tr>
-          <tr><td><label>Response:{{personnel_advice}}</label></td></tr>
-        </table>
-        </div>
-          
+    <h2><center>Personnel Financial Advisor</center></h2>
+    <div class="container">
+      <form action="/personnel_advice" method="post" class="form" method="post">
+        <div class="cta-form"><h3 color="blue">Seeking Stock Specific advice:</h3></div>
+       <label for="sal" class="form-label">Enter your approximate yearly salary: INR </label>
+        <input type="tex" name="sal" id="sal" class="form-input"/><br/>
+        <label for="sal" class="form-label">Enter your age:</label>
+        <input type="text" name="age" id="age" class="form-input"/><br/>
+        <label for="residence" class="form-label">Enter your place of residency:City</label>
+        <input type="text" name="address" id="address" class="form-input"/><br/>
+         <label class="form-label">Enter your gender (M/F): </label>
+          <input type="radio" id="male" name="gender" value="Male" class="form-input">
+          <label for="male" class="form-label">male</label>
+          <input type="radio" id="female" name="gender" value="Female" class="form-input">
+          <label for="female" class="form-label">Female</label></td>
+            <div class="explanation">
+              <p>Response:<br/>{{response}}</p>
+            </div><br/>
+          <input type="submit"/>
       </form>
       
-    </p>
+    </div>
   </body>
 </html>
 

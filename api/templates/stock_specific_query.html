@@ -2,30 +2,30 @@
   <head>
     <metadata charset="UTF-8">
     <title>Specific query</title>
-     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../../static/style.css">
   </head>
   <body>
+    <h2><center>Personnel Financial Advisor</center></h2>
     <div class="container">
-
-      <div class="cta-form"><h3 color="blue">Seeking Stock Specific advice:</h3></div>
       <form action="/stock_specific" method="post" class="form"> 
+      <div class="cta-form"><h3 color="blue">Seeking Stock Specific advice:</h3></div>
        <label for="sal" class="form-label">Enter your approximate yearly salary: INR </label>
-        <input type="tex" name="sal" id="sal" class="form-input"/>
+        <input type="tex" name="sal" id="sal" class="form-input"/><br/>
         <label for="sal" class="form-label">Enter your age:</label>
-        <input type="tex" name="age" id="age" class="form-input"/>
-        <label for="residence" class="form-label">Enter your place of residency:City</label
-        <input type="texarea" name="address" id="address" class="form-input"/>
+        <input type="text" name="age" id="age" class="form-input"/><br/>
+        <label for="residence" class="form-label">Enter your place of residency:City</label>
+        <input type="text" name="address" id="address" class="form-input"/><br/>
          <label class="form-label">Enter your gender (M/F): </label>
           <input type="radio" id="male" name="gender" value="Male" class="form-input">
           <label for="male" class="form-label">male</label>
           <input type="radio" id="female" name="gender" value="Female" class="form-input">
           <label for="female" class="form-label">Female</label></td>
         
-         <label for="stock" class="form-label">Enter stock/crypto symbol that you wish to query for: </label>
+         <br/><label for="stock" class="form-label">Enter stock/crypto symbol that you wish to query for: </label>
           <input type="text" name="stock" id="stock" class="form-input"/>
             <div class="explanation">
-              <p>Response:{{response}}</p>
-            </div>
+              <p>Response:<br/>{{response}}</p>
+            </div><br/>
           <input type="submit"/>
       
       </form>
