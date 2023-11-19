@@ -8,12 +8,18 @@ sys.path.append(str(root))
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 from starlette.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+
 
 from typing import Annotated
 
 from model import generic_advice,share_specific_advice
 
-
+app.mount(
+    "/static",
+    StaticFiles(directory=Path(__file__).parent.parent.absolute() / "static"),
+    name="static",
+)
 
 app = FastAPI()
 templates = Jinja2Templates(directory='./templates')
