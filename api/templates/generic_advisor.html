@@ -2,32 +2,19 @@
   <head>
     <metadata charset="UTF-8">
     <title>Specific query</title>
-    <style>
-      textarea {
-        resize: none;
-      }
-      
-        .form-container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh; /* vh stands for viewport height */
-                }
-
-    form {
-                width: 50%; /* adjust this value to control the form's width */
-    }
-
-      </style>
+   
   </head>
   <body bgcolor="#E0FFFF">
     <p>
-      <form action="/general_advice" method="post">
-        <label color="blue"><h3 color="blue">Seeking General advice:</h3></label><br/>
-        <label for="question">please input your question:</label><br/>
-        <label>{{answer}}</label><br/>
-        <input type="submit"/>
-
-      </p>
+      <form action="/general_advice" method="post" class="form">
+        <div class="cta-form"><p><h3 color="blue">Seeking General advice:</h3></p></div>
+        <label for="question" class="form_label">please input your question:</label><br/>
+        <input type="text" id="question" name="question" class="form_input">
+         <div class="explanation">
+          <p>
+            <label>{{answer}}</label><br/>
+          </p>
+         </div>
+      <input type="submit"/>
     </body>
     </form>
