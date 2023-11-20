@@ -38,7 +38,7 @@ class PersonnelAdvisor():
             print(suggestion,stock_file_path)
             try:
                 
-                df = pd.read_csv(stock_file_path)
+                df = pd.read_csv(stock_file_path+'.csv')
                 print(df.head(5))
                 return self.reccomend(df,None,sym,suggestion)
             except Exception as e:
