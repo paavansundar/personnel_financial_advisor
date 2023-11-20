@@ -4,7 +4,7 @@ import prophet
 #import pytrends
 #from pytrends.request import TrendReq
 from alpha_vantage.timeseries import TimeSeries
-from stock_model_loader import StockModelLoader
+from .stock_model_loader import StockModelLoader
 import matplotlib
 import matplotlib.pyplot as plt
 
