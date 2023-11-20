@@ -16,3 +16,5 @@ langchain
 uvicorn
 openai
 python-multipart
+alpha_vantage
+fbprophet

@@ -29,3 +29,5 @@ class PersonnelAdvisor():
         title = '<u>Suggested stocks</u><br/> {}'.format(
             symtxt)
         print(title,stock_forecast[['ds', 'yhat']].to_json())
+p=PersonnelAdvisor()
+p.getPortfolio(1000,42,'hyd','Male')
