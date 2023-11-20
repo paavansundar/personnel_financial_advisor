@@ -50,7 +50,7 @@ def form_post(request: Request,sal: Annotated[int, Form()],
           address: Annotated[str, Form()],
           stock: Annotated[str, Form()]):
               
-    perPortfolioObj=PersonnelAdvisor(sal,age,address,gender)
+    perPortfolioObj=personnel_portfolio_advisor.PersonnelAdvisor(sal,age,address,gender)
     portfolio=perPortfolioObj.getPortfolio(age,gender,)
     return templates.TemplateResponse('personnel_advisor.html', context={'request': request,'response':portfolio})
 
