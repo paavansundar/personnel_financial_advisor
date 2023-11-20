@@ -13,7 +13,7 @@ from fastapi.staticfiles import StaticFiles
 
 from typing import Annotated
 
-from model import generic_advice,share_specific_advice
+from model import generic_advice,share_specific_advice,personnel_portfolio_advisor
 
 app = FastAPI()
 app.mount(
@@ -47,9 +47,12 @@ def form_post(request: Request,advice: Annotated[str, Form()]):
 def form_post(request: Request,sal: Annotated[int, Form()],
           age: Annotated[int, Form()],
           gender: Annotated[str, Form()],
-          address: Annotated[str, Form()]):
-    
-    return templates.TemplateResponse('personnel_advisor.html', context={'request': request})
+          address: Annotated[str, Form()],
+          stock: Annotated[str, Form()]):
+              
+    perPortfolioObj=PersonnelAdvisor(sal,age,address,gender)
+    portfolio=perPortfolioObj.getPortfolio(age,gender,)
+    return templates.TemplateResponse('personnel_advisor.html', context={'request': request,'response':portfolio})
 
 @app.post('/stock_specific')
 def form_post(request: Request,sal: Annotated[int, Form()],
