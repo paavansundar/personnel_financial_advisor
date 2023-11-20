@@ -20,6 +20,7 @@ class PersonnelAdvisor():
         elif age > 60:
             suggestion =suggestion+"You should invest 30% of your capital in equity,10% in FD, 40% in bonds,20% in gold." 
         return suggestion
+    
   def getPortfolio_orig(self,sal,age,address,gender):
         symbols=['RELIANCE.BSE','BHARTIARTL.BSE','HDFCBANK.BSE','HDFCAMC.BSE','HDFCLIFE.BSE','ASIANPAINT.BSE','INFY.BSE','ITC.BSE','DIVISLAB.BSE','TITAN.BSE','BRITANNIA.BSE']
         suggestion="Please find your allocation as below with share suggestion as below<br/>"
@@ -42,8 +43,8 @@ class PersonnelAdvisor():
           train_mean_error, test_mean_error = trainer.evaluate_prediction()
           print(title,stock_forecast[['ds', 'yhat']].to_json())
           symtxt+=symbol+"<br/>"
-        title = '<u>Suggested stocks</u><br/> {}'.format(
+        symtxt = '<u>Suggested stocks</u><br/> {}'.format(
             symtxt)
-        print(title,stock_forecast[['ds', 'yhat']].to_json())
+        print(symtxt,stock_forecast[['ds', 'yhat']].to_json())
 p=PersonnelAdvisor()
 p.getPortfolio(1000,42,'hyd','Male')
