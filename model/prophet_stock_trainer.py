@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
-import fbprophet
-import pytrends
-from pytrends.request import TrendReq
+import prophet
+#import pytrends
+#from pytrends.request import TrendReq
 from alpha_vantage.timeseries import TimeSeries
-from utilities.stock_model_loader import StockModelLoader
+from stock_model_loader import StockModelLoader
 import matplotlib
 import matplotlib.pyplot as plt
 
@@ -13,13 +13,15 @@ class StockTrainer():
     def __init__(self, api_key, ticker):
         stockLoader = StockModelLoader(api_key, ticker)
         stock = stockLoader.load()
-
+        #print(stock)
         self.stock = stock
         self.symbol = ticker
 
         # Minimum and maximum date in range
-        self.min_date = min(stock['Date'])
-        self.max_date = max(stock['Date'])
+        if stock['Date'] is not None:
+            self.min_date = min(stock['Date'])
+            self.max_date = max(stock['Date'])
+         
         self.min_date = pd.to_datetime(self.min_date)
         self.max_date = pd.to_datetime(self.max_date)
 
@@ -33,10 +35,11 @@ class StockTrainer():
         self.max_price_date = self.max_price_date[self.max_price_date.index[0]]
 
         # The starting price (starting with the opening price)
-        self.starting_price = float(stock.ix[0, 'Adj. Open'])
+        #print("+++++++",stock.iloc[0,3])
+        self.starting_price = float(stock.iloc[0, 2])
 
         # The most recent price
-        self.most_recent_price = float(stock.ix[len(stock) - 1, 'y'])
+        self.most_recent_price = float(stock.iloc[len(stock) - 1, 6])
 
         # Whether or not to round dates
         self.round_dates = True
@@ -58,6 +61,7 @@ class StockTrainer():
         model = self.create_model()
 
         # Fit on the stock history for self.training_years number of years
+        print("++++++++",pd.DateOffset(years=self.training_years))
         stock_history = self.stock[self.stock['Date'] > (
             self.max_date - pd.DateOffset(years=self.training_years)).date()]
 
@@ -130,8 +134,8 @@ class StockTrainer():
         test['in_range'] = False
 
         for i in test.index:
-            if (test.ix[i, 'y'] < test.ix[i, 'yhat_upper']) & (test.ix[i, 'y'] > test.ix[i, 'yhat_lower']):
-                test.ix[i, 'in_range'] = True
+            if (test.iloc[i, 'y'] < test.iloc[i, 'yhat_upper']) & (test.iloc[i, 'y'] > test.iloc[i, 'yhat_lower']):
+                test.iloc[i, 'in_range'] = True
 
         in_range_accuracy = 100 * np.mean(test['in_range'])
 
@@ -143,9 +147,9 @@ class StockTrainer():
 
             # Final prediction vs actual value
             print('\nPredicted price on {} = ${:.2f}.'.format(
-                max(future['ds']).date(), future.ix[len(future) - 1, 'yhat']))
+                max(future['ds']).date(), future.iloc[len(future) - 1, 'yhat']))
             print('Actual price on    {} = ${:.2f}.\n'.format(
-                max(test['ds']).date(), test.ix[len(test) - 1, 'y']))
+                max(test['ds']).date(), test.iloc[len(test) - 1, 'y']))
 
             print('Average Absolute Error on Training Data = ${:.2f}.'.format(
                 train_mean_error))
@@ -178,23 +182,23 @@ class StockTrainer():
                 # If we predicted up and the price goes up, we gain the difference
                 if correct == 1:
                     prediction_profit.append(
-                        nshares * test_pred_increase.ix[i, 'real_diff'])
+                        nshares * test_pred_increase.iloc[i, 'real_diff'])
                 # If we predicted up and the price goes down, we lose the difference
                 else:
                     prediction_profit.append(
-                        nshares * test_pred_increase.ix[i, 'real_diff'])
+                        nshares * test_pred_increase.iloc[i, 'real_diff'])
 
             test_pred_increase['pred_profit'] = prediction_profit
 
             # Put the profit into the test dataframe
             test = pd.merge(
                 test, test_pred_increase[['ds', 'pred_profit']], on='ds', how='left')
-            test.ix[0, 'pred_profit'] = 0
+            test.iloc[0, 'pred_profit'] = 0
 
             # Profit for either method at all dates
             test['pred_profit'] = test['pred_profit'].cumsum().ffill()
             test['hold_profit'] = nshares * \
-                (test['y'] - float(test.ix[0, 'y']))
+                (test['y'] - float(test.iloc[0, 'y']))
 
             # Display information
             print('You played the stock market in {} from {} to {} with {} shares.\n'.format(
@@ -209,14 +213,14 @@ class StockTrainer():
             print('The total profit using the Prophet model = ${:.2f}.'.format(
                 np.sum(prediction_profit)))
             print('The Buy and Hold strategy profit =         ${:.2f}.'.format(
-                float(test.ix[len(test) - 1, 'hold_profit'])))
+                float(test.iloc[len(test) - 1, 'hold_profit'])))
             print('\nThanks for playing the stock market!\n')
 
     # Create a prophet model without training
     def create_model(self):
 
         # Make the model
-        model = fbprophet.Prophet(daily_seasonality=self.daily_seasonality,
+        model = prophet.Prophet(daily_seasonality=self.daily_seasonality,
                                   weekly_seasonality=self.weekly_seasonality,
                                   yearly_seasonality=self.yearly_seasonality,
                                   changepoint_prior_scale=self.changepoint_prior_scale,

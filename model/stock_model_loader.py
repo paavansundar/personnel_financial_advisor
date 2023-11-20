@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
-import fbprophet
-import pytrends
-from pytrends.request import TrendReq
+import prophet
+#import pytrends
+#from pytrends.request import TrendReq
 from alpha_vantage.timeseries import TimeSeries
 
 
@@ -14,17 +14,18 @@ class StockModelLoader():
         self.ticker = ticker
 
     def load(self):
-        stock_file_path = './data/' + self.ticker + '.csv'
+        stock_file_path = './datasets/' + self.ticker + '.csv'
 
         try:
             stock = pd.read_csv(stock_file_path, index_col=0, parse_dates=['index'])
         except FileNotFoundError:
             try:
                 ts = TimeSeries(key=self.api_key, output_format='pandas', indexing_type='integer')
-                stock, meta_data = ts.get_daily_adjusted(symbol=self.ticker, outputsize='full')
-
+                
+                stock, meta_data = ts.get_weekly_adjusted(symbol=self.ticker)
+                #print(stock,meta_data)
                 stock.rename(columns={"index": "Date"},  inplace=True)
-                stock.to_csv(stock_file_path)
+                #stock.to_csv(stock_file_path)
             except Exception as e:
                 print('Error Retrieving Data.')
                 print(e)
@@ -47,6 +48,6 @@ class StockModelLoader():
         stock['y'] = stock['Adj. Close']
         stock['Daily Change'] = stock['Adj. Close'] - stock['Adj. Open']
         stock.drop(['1. open', '2. high', '3. low', '4. close', '5. adjusted close',
-                    '6. volume', '7. dividend amount', '8. split coefficient'], axis=1)
+                    '6. volume', '7. dividend amount'], axis=1)
 
         return stock
