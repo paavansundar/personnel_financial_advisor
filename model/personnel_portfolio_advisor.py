@@ -41,7 +41,7 @@ class PersonnelAdvisor():
           trainer = StockTrainer(api_key, symbol)
           model, stock_history, stock_forecast = trainer.create_prophet_model(30)
           train_mean_error, test_mean_error = trainer.evaluate_prediction()
-          print(title,stock_forecast[['ds', 'yhat']].to_json())
+          print(symbol,stock_forecast[['ds', 'yhat']].to_json())
           symtxt+=symbol+"<br/>"
         symtxt = '<u>Suggested stocks</u><br/> {}'.format(
             symtxt)
