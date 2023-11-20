@@ -2,7 +2,7 @@ from datetime import date
 import json
 from prophet_stock_trainer import StockTrainer
 import os
-
+api_key="T3G64J7EEOLUWF8K"
 class PersonnelAdvisor():
   def getPortfolio(self):
         trainer = StockTrainer(api_key, "tcs")
