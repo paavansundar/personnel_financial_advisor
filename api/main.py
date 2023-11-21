@@ -49,9 +49,12 @@ def form_post(request: Request,sal: Annotated[int, Form()],
           gender: Annotated[str, Form()],
           address: Annotated[str, Form()],
           ):
-              
-    perPortfolioObj=personnel_portfolio_advisor.PersonnelAdvisor()
-    portfolio=perPortfolioObj.getPortfolio(sal,age,address,gender)
+    portfolio=""
+    try:          
+        perPortfolioObj=personnel_portfolio_advisor.PersonnelAdvisor()
+        portfolio=perPortfolioObj.getPortfolio(sal,age,address,gender)
+    except Exception as e:
+        portfolio=str(e)
     return templates.TemplateResponse('personnel_advisor.html', context={'request': request,'response':portfolio})
 
 @app.post('/stock_specific')
@@ -60,16 +63,22 @@ def form_post(request: Request,sal: Annotated[int, Form()],
           gender: Annotated[str, Form()],
           address: Annotated[str, Form()],
           stock: Annotated[str, Form()]):
-    print("age",age,gender,address,stock)
-    stockObj=share_specific_advice.StockSpecific()
-    res=stockObj.getStockAdvice(sal,age,address,gender,stock)
+    res=""
+    try:
+        stockObj=share_specific_advice.StockSpecific()
+        res=stockObj.getStockAdvice(sal,age,address,gender,stock)
+    except Exception as e:
+        res=str(e)
     return templates.TemplateResponse('stock_specific_query.html', context={'request': request,'response':res})
 
 @app.post('/general_advice')
 def form_post(request: Request,prompt: Annotated[str, Form()]):
-    print(prompt)
-    genericAdviceObj=generic_advice.GenericAdvice()
-    answer=genericAdviceObj.chat(prompt)
+    answer=""
+    try:
+        genericAdviceObj=generic_advice.GenericAdvice()
+        answer=genericAdviceObj.chat(prompt)
+    except Exception as e:
+        answer=str(e)
     return templates.TemplateResponse('generic_advisor.html', context={'request': request,'answer':answer})
 
 
