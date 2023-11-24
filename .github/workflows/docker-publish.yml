@@ -1,0 +1,21 @@
+name: personnel_financial_advisor_cd
+
+# Only trigger, when the build workflow succeeded
+on:
+  workflow_run:
+    workflows: ["personnel_financial_advisor_ci"]
+    types:
+      - completed
+
+jobs:
+
+  build:
+
+    runs-on: [self-hosted]
+
+    steps:  
+    
+    - name: Build and push Docker image
+      run: |
+        sudo docker pull paavansundar/personnel_financial_advisor:latest
+        
