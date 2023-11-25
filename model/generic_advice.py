@@ -9,9 +9,9 @@ import PyPDF2
 
 import warnings
 warnings.filterwarnings('ignore')
-_file_path = './datasets/iinvestrbook.pdf'
+_file_path = '../datasets/iinvestrbook.pdf'
 _checkpoint = "gpt2"
-_model_output_path = "./trained_models"
+_model_output_path = "../trained_models"
 class GenericAdvice:   
     def generate_response(self,model, tokenizer, prompt, max_length=100):
         print("prompt is ",prompt)

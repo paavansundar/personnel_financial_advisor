@@ -8,13 +8,14 @@ import PyPDF2
 
 import warnings
 warnings.filterwarnings('ignore')
-_file_path = './datasets/iinvestrbook.pdf'
+_file_path = '../datasets/iinvestrbook.pdf'
 _checkpoint = "gpt2"
-_model_output_path = "./trained_models"
+_model_output_path = "../trained_models"
 class GenericAdviceTraining:
     def read_txt(self,file_path):
      text="" 
      try:
+        path = os. pardir 
         pdf_reader = PyPDF2.PdfReader(file_path)
         for i in range(len(pdf_reader.pages)):
             page = pdf_reader.pages[i]
@@ -36,12 +37,12 @@ class GenericAdviceTraining:
 
        train_text = text_file[:split_index]
        val_text = text_file[split_index:]
-
-
-       with open("./trained_models/train.txt", "w+") as f:
+       #print(val_text)
+       
+       with open("../trained_models/train.txt", "w+") as f:
           f.write(train_text)
 
-       with open("./trained_models/val.txt", "w+") as f:
+       with open("../trained_models/val.txt", "w+") as f:
           f.write(val_text)
        
     def loadGPT(self): 
@@ -53,9 +54,9 @@ class GenericAdviceTraining:
      self.preprocessBook()
      try:
        # Tokenize train text
-        train_dataset = TextDataset(tokenizer=tokenizer, file_path="./trained_models/train.txt", block_size=128)
+        train_dataset = TextDataset(tokenizer=tokenizer, file_path="../trained_models/train.txt", block_size=128)
         # Tokenize validation text
-        val_dataset = TextDataset(tokenizer=tokenizer, file_path="./trained_models/val.txt", block_size=128)
+        val_dataset = TextDataset(tokenizer=tokenizer, file_path="../trained_models/val.txt", block_size=128)
         # Create a Data collator object
         data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False, return_tensors="pt")
         # Set up the model
@@ -67,7 +68,7 @@ class GenericAdviceTraining:
             overwrite_output_dir = True,
             per_device_train_batch_size = 4, # try with 4
             per_device_eval_batch_size = 4,  #  try with 4
-            num_train_epochs = 2,#100
+            num_train_epochs = 1,#100
             save_steps = 1_000,
             save_total_limit = 2,
             logging_dir = './logs',
