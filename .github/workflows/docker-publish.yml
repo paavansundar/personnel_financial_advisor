@@ -17,5 +17,5 @@ jobs:
     
     - name: Build and push Docker image
       run: |
-        sudo docker pull paavansundar/personnel_financial_advisor:latest
+        docker pull paavansundar/personnel_financial_advisor:latest
         
