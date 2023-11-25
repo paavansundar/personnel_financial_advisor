@@ -70,7 +70,7 @@ class GenericAdviceTraining:
             per_device_eval_batch_size = 4,  #  try with 4
             num_train_epochs = 1,#100
             save_steps = 1_000,
-            save_total_limit = 2,
+            save_total_limit = 4,
             logging_dir = './logs',
           )
         # Train the model
