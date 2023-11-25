@@ -8,5 +8,7 @@ WORKDIR /personnel_financial_advisor
 
 RUN pip install --no-cache-dir -r ./requirements/requirements.txt
 
+WORKDIR /personnel_financial_advisor/api
+
 CMD ["uvicorn", "app.main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "80"]
 
