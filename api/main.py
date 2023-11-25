@@ -21,7 +21,7 @@ app.mount(
     StaticFiles(directory=Path(__file__).parent.parent.absolute() / "static"),
     name="static",
 )
-templates = Jinja2Templates(directory='./templates')
+templates = Jinja2Templates(directory='/templates')
 
 @app.get('/')
 def read_form(request: Request):
