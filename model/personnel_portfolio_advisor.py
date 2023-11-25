@@ -10,7 +10,7 @@ from alpha_vantage.timeseries import TimeSeries
 
 import prophet
 
-api_key=""
+api_key="RI5FRFKGBQPQGZME"
 class PersonnelAdvisor():
   
   def getPortfolio(self,sal,age,address,gender):
