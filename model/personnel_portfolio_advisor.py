@@ -34,7 +34,7 @@ class PersonnelAdvisor():
   def predict_price(self,suggestion,symbols):
     
     for sym in symbols:
-            stock_file_path="../datasets/"+sym
+            stock_file_path="./datasets/"+sym
             #print(suggestion,stock_file_path)
             try:
                 
